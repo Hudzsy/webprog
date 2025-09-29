@@ -27,5 +27,19 @@ function betolt() {
             option.selected = true
         }  
         select.append(option)
+        select.addEventListener('change', ()=>{
+            const selected = select.value;
+            console.log(selected);   
+            const demo = document.querySelector('#demo');
+            demo.textContent = selected;
+            const image = document.querySelector('#image');
+            const img = document.createElement('img');
+            img.src = `./img/${selected}.jpg`;
+            img.alt = selected;
+            img.title = (selected);
+            console.log(img);
+            image.replaceChildren(img);
+        })
+
     })
 }
