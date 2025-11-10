@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1C203A;
+}
+
+.container {
+    display: flex; 
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.message-box {
+    background-color:#23af6b;
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    width: 75%;
+    font-size: 20pt;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 5pt;
+}
+
+.message-button {
+    background-color:#198754;
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    width: 75%;
+    font-size: 12pt;
+    font-weight: bold;
+    border: none;
+    border-radius: 5pt;
+    cursor: pointer;
+}
