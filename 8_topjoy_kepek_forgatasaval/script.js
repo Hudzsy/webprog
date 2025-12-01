@@ -20,3 +20,23 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error(error);
     }
 });
+
+const animateCap = async (start, end) => {
+    const step = start < end ? 1 : -1
+    for (let i = start; i !== end + step; i+=step) {
+        await new Promise(resolve => setTimeout(resolve, 13));
+        kupak.src = `./images/bottlecap_${i}.png`;
+    }
+}
+
+tarolo.addEventListener('click', async () => { 
+    if (zarvaVanE) {
+        await animateCap(0, 10);
+        szoveg.textContent = uzik[Math.floor(Math.random() * uzik.length)]
+        zarvaVanE = false
+    } else {
+        await animateCap(10, 0);
+        szoveg.textContent = "";
+        zarvaVanE = true
+    }
+});

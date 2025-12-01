@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         const uzik = await fetch("./uzik.csv")
         //console.log(uzik)
         uzikText = (await uzik.text()).split('\n').map(sor => `${sor.trim()}`);
-        //console.log(uzikText);fasz geci nigger
+        //console.log(uzikText);
         uzikText.forEach(uzi => {
             messages.push(uzi)
         });
