@@ -49,7 +49,7 @@ async function loadCards() {
 function createCard(fileName, index){
     const card = document.createElement('div')
     card.className = 'card'
-
+    
     const img = document.createElement('img')
     img.src=`${IMG_MAPPA}${fileName}`
     img.alt=`dog${index+1}`
@@ -68,5 +68,5 @@ function createCard(fileName, index){
     contents.append(p)
     card.append(contents)
     return card
-    
 }
+
