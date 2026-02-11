@@ -1,61 +1,74 @@
-const characters = document.querySelector('#characters')
-console.log(characters);
-
+const characters = document.querySelector('#characters');
 const HP_URL = 'https://raw.githubusercontent.com/Laboratoria/LIM011-data-lovers/master/src/data/potter/potter.json';
 
-window.addEventListener('DOMContentLoaded', fetchCharacters)
+window.addEventListener('DOMContentLoaded', fetchCharacters);
 
 async function fetchCharacters() {
     try {
-        const res = await fetch(HP_URL)
-        // console.log(res);
+        const res = await fetch(HP_URL);
         if (!res.ok) {
             return alert('Nem sikerült betölteni a fájlt');
         }
-        const chars = await res.json();
-        // console.log(chars);
+        const data = await res.json();
 
-        displayCharacters(chars)
+        const chars = Array.isArray(data) ? data : data.potter; 
 
-        files.forEach((fileName, index) => {
-           characters.appendChild(createCard(fileName, index)) 
-        });
+        if (!chars) {
+            throw new Error("Az adatszerkezet nem megfelelő!");
+        }
+
+        displayCharacters(chars);
 
     } catch (error) {
-        alert(`Hiba: ${error}`)
+        alert(`Hiba: ${error}`);
     }
 }
 
 function displayCharacters(chars) {
-    // console.log(chars);
-
+    characters.innerHTML = '';
     chars.forEach(char => {
-        characters.appendChild(createCard(fileName, index)) 
+        characters.appendChild(createCard(char));
      });
 }
 
-function createCard(fileName, index){
-    const card = document.createElement('div')
-    card.className = 'card'
+function fixImageUrl(url) {
+	if(!url) {
+		return alert('A tömböt elfelejtetted elküldeni')
+	}
+	
+	return url
+	.replace('http://hp-api.herokuapp.com/', 'https://hp-api.onrender.com/' )
+	.replace('http://', 'https://')
+}
+
+
+function createCard(char){
+    const card = document.createElement('div');
+    card.className = 'card';
     
-    const img = document.createElement('img')
-    img.src=`${IMG_MAPPA}${fileName}`
-    img.alt=`dog${index+1}`
+    const img = document.createElement('img');
+    img.src = fixImageUrl(char.image)
+    img.alt = char.name;
     
-    const contents = document.createElement('div')
-    contents.className = 'content'
+    // A kép nem fog megjelenni, szerintemn rossz az url.
+    
+    const contents = document.createElement('div');
+    contents.className = 'content';
 
-    const h3 = document.createElement('h3')
-    h3.textContent = `Kutya #${index+1}`
+    const h3 = document.createElement('h3');
+    h3.textContent = char.name;
+    const p = document.createElement('p');
+    p.innerHTML = `
+        Ház: ${char.house || 'Ismeretlen'}<br>
+        Születési év: ${char.yearOfBirth || 'Ismeretlen'}<br>
+        Színész: ${char.actor || 'Ismeretlen'}
+    `;
 
-    const p = document.createElement('p')
-    p.textContent = `${fileName}`
-
-    contents.append(h3)
-    card.append(img)
-    contents.append(p)
-    card.append(contents)
-    return card
+    contents.append(h3);
+    contents.append(p);
+    card.append(img);
+    card.append(contents);
+    return card;
 }
 
 
