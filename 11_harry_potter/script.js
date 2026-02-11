@@ -50,8 +50,6 @@ function createCard(char){
     img.src = fixImageUrl(char.image)
     img.alt = char.name;
     
-    // A kép nem fog megjelenni, szerintemn rossz az url.
-    
     const contents = document.createElement('div');
     contents.className = 'content';
 
